@@ -1,0 +1,7 @@
+@startuml
+
+Bob -> Alice: Test!!!
+
+Random -> Test!
+
+@enduml
