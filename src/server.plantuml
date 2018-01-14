@@ -1,7 +1,92 @@
 @startuml
 
-Bob -> Alice: Test!!!
+object User {
+    fullName: string;
+    email: string;
+    password: string;
+    moderatorForCity: City[];
+    trips: Trip[];
+    rates: Rate[];
+    photos: Photo[];
+    locations: LatLng[];
+}
 
-Random -> Test!
+object City {
+    name: string;
+    location: LatLng;
+    radius: double;
+    moderators: User[];
+    pointOfInterests: POI[];
+}
+
+object POI {
+    name: string;
+    location: LatLng;
+    detectedPhotos: Photo[];
+    city: City;
+}
+
+object LatLng {
+    lat: double;
+    lng: double;
+}
+
+object Trip {
+    startDate: date;
+    endDate: date;
+    purchases: Purchase[];
+    users: User[];
+    photos: Photo[];
+}
+
+object Rate {
+    ratingData: any[];
+    pointOfInterest: POI;
+    user: User;
+}
+
+object Purchase {
+    item: PurchaseItem;
+    date: Date;
+    moneySpent: double;
+}
+
+object PurchaseItem {
+    id: double;
+    name: string;
+    cost: double;
+}
+
+object Photo {
+    yaw: double;
+    angle: double;
+    location: LatLng;
+    imageData: byte;
+    takenBy: User;
+}
+
+User -> City
+User --> Trip
+User --> Rate
+User --> Photo
+User -> LatLng
+
+POI --> LatLng
+POI --> Photo
+
+City -> POI
+City --> LatLng
+City --> User
+
+Trip --> User
+Trip --> Purchase
+
+Rate --> POI
+
+Purchase --> PurchaseItem
+
+Photo -> User
+Photo -> LatLng
+Trip -> Photo
 
 @enduml
